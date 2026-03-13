@@ -1,0 +1,84 @@
+<!-- Device Table Page -->
+<!-- Shows all connected BL602 devices with their status, IP, pins, and actions -->
+<section class="page page--active" data-page="home">
+  <div class="page-header">
+    <div class="page-title">
+      <h1>Devices</h1>
+      <span class="page-subtitle">Manage your PineCone BL602 devices</span>
+    </div>
+    <!-- Delete all devices button -->
+    <button class="btn-danger" id="clearTableBtn" type="button">
+      <i data-feather="trash-2"></i>
+      <span>Clear All</span>
+    </button>
+  </div>
+
+  <!-- Device Statistics Counter -->
+  <div id="statsCounter"></div>
+
+  <!-- Device list table -->
+  <table>
+    <thead>
+      <tr>
+        <th class="col-status">Status</th>
+        <th class="col-id">ID</th>
+        <th class="col-ip">IP/Protocol</th>
+        <th class="col-desc">Description</th>
+        <th class="col-seen">Last Seen</th>
+        <th class="col-actions">Actions</th>
+      </tr>
+    </thead>
+    <!-- tbody is populated by device-renderer.js -->
+    <tbody id="tbody">
+      {% for id, d in devices.items() %}
+      <tr data-id="{{ id }}">
+        <td class="status-cell" data-label="Status">
+          <div class="device-status device-status--online">
+            <span class="device-status-dot"></span>
+            <span>Online </span>
+          </div>
+        </td>
+        <td data-label="ID">{{ id }}</td>
+        <td data-label="IP">{{ d.ip }}</td>
+        <td class="desc-cell" data-id="{{ id }}" data-label="Description">
+          <span class="desc-text">{{ d.description }}</span>
+        </td>
+        <td data-label="Last Seen">{{ d.last_seen }}</td>
+        <td class="actions-cell" data-label="Actions">
+          <button class="edit-btn" type="button" data-id="{{ id }}" data-tooltip="Edit Description">
+            <i data-feather="edit-3"></i>
+          </button>
+          <button
+            class="copy-btn"
+            type="button"
+            data-id="{{ id }}"
+            data-original-icon="copy"
+            aria-label="Copy JSON"
+            data-tooltip="Copy JSON"
+          >
+            <i data-feather="copy"></i>
+          </button>
+          <button
+            class="blink-btn {{ 'blink-active' if d.blink else '' }}"
+            type="button"
+            data-id="{{ id }}"
+            aria-label="Toggle blink"
+            data-tooltip="Blink Device"
+          >
+            <i data-feather="sun"></i>
+          </button>
+          <button
+            class="delete-btn"
+            type="button"
+            data-id="{{ id }}"
+            aria-label="Delete device"
+            data-tooltip="Delete Device"
+          >
+            <i data-feather="trash-2"></i>
+          </button>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>

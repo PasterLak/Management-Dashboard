@@ -1,0 +1,125 @@
+<!-- Simulator Page -->
+<!-- Create virtual 'BL602 devices' that communicate with the dashboard -->
+<!-- Useful for development and testing without physical hardware so we can code dashboard and pinecones simultaneously -->
+<section class="page simulator-page" data-page="simulator">
+  <div class="page-header">
+    <div class="page-title">
+      <h1>Simulator</h1>
+      <span class="page-subtitle"
+        >Create virtual PineCone devices that automatically send POST requests
+        to <code>/api/data</code>. Configure the interval and JSON payload for
+        each simulator.</span
+      >
+    </div>
+  </div>
+
+  <!-- Collapsible help section with JSON structure examples -->
+  <div class="sim-info-card">
+    <div class="sim-info-header" id="togglePinInfo">
+      <div class="sim-info-title">
+        <i data-feather="info"></i>
+        <span>Pin Configuration Guide</span>
+      </div>
+      <i data-feather="chevron-down" class="sim-info-toggle"></i>
+    </div>
+    <div class="sim-info-content" id="pinInfoContent">
+      <div class="sim-info-section">
+        <h3>JSON Structure</h3>
+        <pre><code>{
+  "id": "PineCone_001",
+  "d": "My Device",
+  "p": {
+    "GPIO0": {
+      "n": "button",
+      "m": "input",
+      "v": "1"
+    },
+    "GPIO1": {
+      "n": "led_red",
+      "m": "output",
+      "v": "0"
+    }
+  }
+}</code></pre>
+      </div>
+
+      <div class="sim-info-section">
+        <h3>Available Pin Modes</h3>
+        <div class="pin-modes-grid">
+          <div class="pin-mode-info">
+            <span class="pin-mode-badge pin-mode-badge--input">input</span>
+            <span>Standard input pin</span>
+          </div>
+          <div class="pin-mode-info">
+            <span class="pin-mode-badge pin-mode-badge--output">output</span>
+            <span>Standard output pin</span>
+          </div>
+          <div class="pin-mode-info">
+            <span class="pin-mode-badge pin-mode-badge--pullup">pullup</span>
+            <span>Input with pull-up resistor</span>
+          </div>
+          <div class="pin-mode-info">
+            <span class="pin-mode-badge pin-mode-badge--pulldown"
+              >pulldown</span
+            >
+            <span>Input with pull-down resistor</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sim-info-section">
+        <h3>
+          Example Payloads (creates a new simulator with prefilled JSON each
+          time)
+        </h3>
+        <div class="sim-examples">
+          <button class="sim-example-btn" data-example="button">
+            Button Example
+          </button>
+          <button class="sim-example-btn" data-example="led">
+            LED Example
+          </button>
+          <button class="sim-example-btn" data-example="sensor">
+            Sensor Example
+          </button>
+          <button class="sim-example-btn" data-example="joystick">
+            Joystick Example
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global simulator controls -->
+  <div class="sim-controls">
+    <button id="addSimulator" class="btn-primary" type="button">
+      <i data-feather="plus"></i>
+      <span>New Simulator</span>
+    </button>
+    <button id="startAll" class="btn-success" type="button">
+      <i data-feather="play"></i>
+      <span>Start All</span>
+    </button>
+    <button id="stopAll" class="btn-tertiary" type="button">
+      <i data-feather="stop-circle"></i>
+      <span>Stop All</span>
+    </button>
+    <button id="sendOnceAll" class="btn-secondary" type="button">
+      <i data-feather="send"></i>
+      <span>Send Once All</span>
+    </button>
+    <button id="clearAll" class="btn-warning" type="button">
+      <i data-feather="x-circle"></i>
+      <span>Clear All Responses</span>
+    </button>
+    <button id="removeAll" class="btn-danger" type="button">
+      <i data-feather="trash-2"></i>
+      <span>Remove All</span>
+    </button>
+  </div>
+
+  <!-- Container for simulator cards (populated by simulator-renderer.js) -->
+  <div id="simulatorList" class="simulator-list">
+    <!-- Simulator cards are dynamically created here by simulator-renderer.js -->
+  </div>
+</section>

@@ -1,0 +1,98 @@
+<!-- Main Dashboard Template -->
+<!-- Combines all page templates into a single-page application -->
+{% include 'header.html' %}
+<body>
+  <div class="layout">
+    <!-- Left navigation sidebar -->
+    {% include 'sidebar.html' %}
+
+    <!-- Overlay to block clicks when sidebar is open -->
+    <div class="sidebar-overlay"></div>
+
+    <!-- Main content area (pages toggled by sidebar&pagemanager) -->
+    <main class="main-content">
+      <div class="page-container">
+        <!-- Device Table: Shows all connected BL602 devices -->
+        {% include 'device_table.html' %}
+
+        <!-- Simulator: Create virtual devices for testing -->
+        {% include 'pinecone_simulator.html' %}
+
+        <!-- Console: View Flask server logs -->
+        {% include 'console.html' %}
+
+        <!-- Settings: Configure polling intervals and thresholds -->
+        {% include 'settings.html' %}
+      </div>
+    </main>
+  </div>
+</body>
+
+<!-- Pass initial device data from Flask to JavaScript -->
+<script>
+  window.initialDevices = {{ devices | tojson }};
+  window.serverNowMs = {{ server_now_ms }};
+</script>
+
+<!-- Load JavaScript modules in dependency order -->
+<!-- Base utilities -->
+<script src="{{ url_for('static', filename='js/utils/api-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/polling-service.js') }}"></script>
+
+<!-- Utility Scripts -->
+<script src="{{ url_for('static', filename='js/utils/time-utils.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/input-validation.js') }}"></script>
+
+<!-- Component Scripts -->
+<script src="{{ url_for('static', filename='js/components/stats-counter.js') }}"></script>
+
+<!-- Settings Manager -->
+<script src="{{ url_for('static', filename='js/core/settings-manager.js') }}"></script>
+
+<!-- Console Manager -->
+<script src="{{ url_for('static', filename='js/console/console-config.js') }}"></script>
+<script src="{{ url_for('static', filename='js/console/console-dom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/console/console-renderer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/console/console-polling-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/console/console-event-handler.js') }}"></script>
+<script src="{{ url_for('static', filename='js/console/console-manager.js') }}"></script>
+
+<!-- Settings UI Components -->
+<script src="{{ url_for('static', filename='js/settings/settings-config.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings/settings-dom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings/settings-validator.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings/settings-form.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings/settings-actions.js') }}"></script>
+<script src="{{ url_for('static', filename='js/settings/settings-ui-manager.js') }}"></script>
+
+<!-- Sidebar & Page Managers -->
+<script src="{{ url_for('static', filename='js/sidebar/sidebar-manager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/sidebar/page-manager.js') }}"></script>
+
+<!-- Device (Table) Manager -->
+<script src="{{ url_for('static', filename='js/table/device-config.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-dom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-data-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-row-renderer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-edit-handler.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-pin-manager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-renderer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-actions.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-polling-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-event-handler.js') }}"></script>
+<script src="{{ url_for('static', filename='js/table/device-manager.js') }}"></script>
+
+<!-- PineCone Simulator Manager -->
+<script src="{{ url_for('static', filename='js/simulator/simulator-config.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-dom.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-data-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-card-renderer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-console-manager.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-actions.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-polling-service.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-renderer.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-event-handler.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulator/simulator-manager.js') }}"></script>
+
+<!-- Initialize Dashboard -->
+{% include 'initiate_dashboard.html' %}

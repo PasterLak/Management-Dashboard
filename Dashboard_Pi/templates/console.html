@@ -1,0 +1,26 @@
+<!-- Console Log Page -->
+<!-- Displays Flask server logs in real-time with color-coded categories -->
+<section class="page console-page" data-page="console">
+  <div class="console-container">
+    <div class="console-header">
+      <h2>Flask Server Console</h2>
+      <div class="console-actions">
+        <!-- Clear all logs button -->
+        <button id="consoleClearBtn" class="btn-danger" type="button">
+          <i data-feather="trash-2"></i>
+          <span>Clear</span>
+        </button>
+      </div>
+    </div>
+    <div class="console-output-wrapper">
+      <!-- Log output area (populated by console-renderer.js) -->
+      <div class="console-output" id="consoleOutput">
+        <div class="console-line console-info">Waiting for server logs...</div>
+      </div>
+      <!-- Scroll to bottom button (appears when user scrolls up) -->
+      <button class="console-scroll-btn" id="consoleScrollBtn" type="button">
+        <i data-feather="arrow-down"></i>
+      </button>
+    </div>
+  </div>
+</section>

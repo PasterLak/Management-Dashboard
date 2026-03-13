@@ -1,0 +1,207 @@
+<!-- Settings Page -->
+<!-- Configure dashboard polling intervals and thresholds -->
+<section class="page settings-page" data-page="settings">
+  <div class="page-header">
+    <div class="page-title">
+      <h1>Settings</h1>
+      <span class="page-subtitle"
+        >Configure polling intervals and update thresholds</span
+      >
+    </div>
+  </div>
+
+  <div class="settings-container">
+    <div class="settings-card">
+      <h2>System</h2>
+      <p class="settings-description">
+        Information about the device running the Flask backend.
+      </p>
+
+      <div class="settings-field">
+        <label>Open Dashboard on Network</label>
+        <span class="settings-hint">
+          These links are the local IPv4 addresses that other devices on the same network can use to reach the dashboard.
+        </span>
+        
+
+        {% if dashboard_endpoints %}
+          <div class="endpoint-list" role="list">
+            {% for ep in dashboard_endpoints %}
+              <div class="endpoint-item" role="listitem">
+                <div class="endpoint-input-row">
+                  <input class="endpoint-input" type="text" value="{{ ep }}" readonly />
+                  <button class="btn-secondary endpoint-copy" type="button" data-copy-text="{{ ep }}">
+                    <span>Copy</span>
+                  </button>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% elif dashboard_endpoint %}
+          <div class="endpoint-list" role="list">
+            <div class="endpoint-item" role="listitem">
+              <div class="endpoint-input-row">
+                <input class="endpoint-input" type="text" value="{{ dashboard_endpoint }}" readonly />
+                <button class="btn-secondary endpoint-copy" type="button" data-copy-text="{{ dashboard_endpoint }}">
+                  <span>Copy</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        {% else %}
+          <div class="endpoint-empty">No local IPv4 addresses found.</div>
+        {% endif %}
+        <span class="settings-hint">
+          Warning: Not every listed IP will always work from every device. Reachability depends on network routing, firewall rules, VPN/virtual adapters, and router settings (for example client/AP isolation).
+        </span>
+      </div>
+    </div>
+
+    <div class="settings-card mt-20">
+      <h2>Polling & Update Intervals</h2>
+      <p class="settings-description">
+        Configure how often the dashboard fetches data from the server. Lower
+        values = more responsive but higher server load.
+      </p>
+
+      <div class="settings-field">
+        <label for="pollIntervalInput">Device Polling Interval (ms)</label>
+        <input
+          type="number"
+          id="pollIntervalInput"
+          min="10"
+          step="10"
+          value="50"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >How often the dashboard fetches device data from the server (device
+          table updates). Default: 50ms</span
+        >
+      </div>
+
+      <div class="settings-field">
+        <label for="simulatorPollInput">Simulator Polling Interval (ms)</label>
+        <input
+          type="number"
+          id="simulatorPollInput"
+          min="100"
+          step="100"
+          value="500"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >How often the dashboard fetches new responses from running
+          simulators. Default: 500ms</span
+        >
+      </div>
+
+      <div class="settings-field">
+        <label for="consolePollInput">Console Polling Interval (ms)</label>
+        <input
+          type="number"
+          id="consolePollInput"
+          min="100"
+          step="100"
+          value="500"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >How often the Console tab fetches new server logs (Flask terminal
+          output). Default: 500ms</span
+        >
+      </div>
+
+      <div class="settings-field">
+        <label for="tickOfflineInput">Offline Check Interval (ms)</label>
+        <input
+          type="number"
+          id="tickOfflineInput"
+          min="100"
+          step="100"
+          value="1000"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >How often the dashboard checks if devices have exceeded the offline
+          threshold. Default: 1000ms</span
+        >
+      </div>
+    </div>
+
+    <div class="settings-card mt-20">
+      <h2>Thresholds & Limits</h2>
+      <p class="settings-description">
+        Configure timeouts and display limits for better performance.
+      </p>
+
+      <div class="settings-field">
+        <label for="offlineThresholdInput">Offline Threshold (ms)</label>
+        <input
+          type="number"
+          id="offlineThresholdInput"
+          min="100"
+          step="100"
+          value="5000"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >Time of inactivity before a device is marked as offline (no heartbeat
+          received). Default: 5000ms</span
+        >
+      </div>
+
+      <div class="settings-field">
+        <label for="maxConsoleLinesInput">Max Console Lines</label>
+        <input
+          type="number"
+          id="maxConsoleLinesInput"
+          min="100"
+          max="10000"
+          step="100"
+          value="1000"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >Maximum number of log lines to keep in the Console tab. Older logs
+          are automatically removed. Default: 1000</span
+        >
+      </div>
+
+      <div class="settings-field">
+        <label for="maxSimulatorResponsesInput">Max Simulator Responses</label>
+        <input
+          type="number"
+          id="maxSimulatorResponsesInput"
+          min="10"
+          max="500"
+          step="10"
+          value="100"
+          inputmode="numeric"
+          pattern="[0-9]*"
+        />
+        <span class="settings-hint"
+          >Maximum number of responses to keep per simulator (server-side
+          limit). Default: 100</span
+        >
+      </div>
+    </div>
+
+    <div class="center-btn mt-20">
+      <button id="resetSettingsBtn" class="btn-secondary" type="button">
+        <i data-feather="rotate-ccw"></i>
+        <span>Reset to Defaults</span>
+      </button>
+      <button id="saveSettingsBtn" class="btn-primary" type="button">
+        <i data-feather="save"></i>
+        <span>Save Settings</span>
+      </button>
+    </div>
+  </div>
+</section>

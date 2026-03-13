@@ -1,0 +1,35 @@
+<script>
+  /**
+   * Dashboard Initialization
+   * Sets up and initializes all dashboard components
+   */
+  (() => {
+    // Initialize managers
+    const settingsManager = new SettingsManager();
+    const consoleManager = new ConsoleManager(settingsManager);
+    const sidebarManager = new SidebarManager();
+    const pageManager = new PageManager(consoleManager);
+    const settingsUIManager = new SettingsUIManager(settingsManager);
+    const deviceManager = new DeviceManager(settingsManager);
+    const simulatorManager = new SimulatorManager(settingsManager);
+
+    // Make settingsManager globally available
+    window.settingsManager = settingsManager;
+
+    // Initialize all component
+    consoleManager.init();
+    sidebarManager.init();
+    pageManager.init();
+    deviceManager.init();
+    simulatorManager.init();
+    settingsUIManager.init();
+
+    // Scroll to top on load
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    // Initialize Feather icons
+    if (window.feather) {
+      feather.replace();
+    }
+  })();
+</script>

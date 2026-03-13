@@ -1,0 +1,92 @@
+#------------------------------------------------------------------------------#
+## RUN A BASH FILE
+#------------------------------------------------------------------------------#
+1) Open the terminal in the folder with .sh file
+2) Run these commands:
+
+chmod +x install_toolchain.sh
+./install_toolchain.sh
+
+#------------------------------------------------------------------------------#
+## HOW SETUP THE PROJECT
+#------------------------------------------------------------------------------#
+ 1) run  ./install_toolchain.sh in the terminal
+ 2) move the project to user/bl602_iot_sdk/customer_app
+    (the project will not compile if not in the sdk folder :/ )
+ 3) run  ./compile.sh in terminal for compile the project
+ 4) run ./flash.sh in terminal to upload the compiled files to pinecone and follow the instructions in the terminal
+
+
+
+## COMPILE  -> run:   ./compile.sh
+## FLASH  -> run and follow the instructons:   ./flash.sh
+## REBUILD -> same as clean + compile
+
+## CLEAN  (clean compiled files )-> run:   ./clean.sh
+
+#------------------------------------------------------------------------------#
+  INSTALL TOOLS FOR DEVELOPMENT
+#------------------------------------------------------------------------------#
+install VS Code:
+https://go.microsoft.com/fwlink/?LinkID=760868
+
+install GitHub Desktop:
+
+wget https://github.com/shiftkey/desktop/releases/download/release-3.2.1-linux1/GitHubDesktop-linux-3.2.1-linux1.deb
+sudo dpkg -i GitHubDesktop-linux-3.2.1-linux1.deb
+rm GitHubDesktop-linux-3.2.1-linux1.deb
+
+
+
+#------------------------------------------------------------------------------#
+COMMANDS
+#------------------------------------------------------------------------------#
+
+// get ports of connected usb devices
+
+dmesg | grep tty
+
+gcc --version
+//gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0
+ldd --version
+// linking 
+
+// get all pinecone usb devices, ttyUSB0 - usually the first one
+ls /dev/ttyUSB*
+
+#------------------------------------------------------------------------------#
+
+
+for perfomance test:
+
+extern "C" {
+
+#include <math.h>
+}
+
+#include "components/profiler.hpp"
+
+
+  Profiler profiler;
+  printf("Start\n");
+  volatile double result = 0.0;
+
+  profiler.start();
+
+  for (long i = 1; i < 1000000; i++) {
+    result += sqrt(static_cast<double>(i));
+  }
+
+  result += 1;
+
+  profiler.end();
+  printf("Completed %d iterations\n", 1000000);
+  profiler.printTime();
+  printf("Result: %f\n", result); 
+
+  Results:
+   // bl602: Time: 11036580us (11036.58ms) (11.03s)
+   // uno:   Time: 44336540us (44336.53ms) (44.33s)
+   // xiao:  Time: 35283162us (35283.16ms) (35.28s)
+
+#------------------------------------------------------------------------------#

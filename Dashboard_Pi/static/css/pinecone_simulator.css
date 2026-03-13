@@ -1,0 +1,996 @@
+.simulator-page {
+    margin-bottom: 20px;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.sim-info-card {
+    background: var(--row-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.sim-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    user-select: none;
+}
+
+.sim-info-header:hover {
+    background: var(--bg);
+}
+
+.sim-info-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--brand);
+}
+
+.sim-info-title svg {
+    width: 20px;
+    height: 20px;
+}
+
+.sim-info-toggle {
+    width: 20px;
+    height: 20px;
+    color: var(--text);
+    transition: transform 0.3s ease;
+}
+
+.sim-info-header.active .sim-info-toggle {
+    transform: rotate(180deg);
+}
+
+.sim-info-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.sim-info-content.show {
+    max-height: 1000px;
+    border-top: 1px solid var(--border);
+}
+
+.sim-info-section {
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.sim-info-section:last-child {
+    border-bottom: none;
+}
+
+.sim-info-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.sim-info-section pre {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    overflow-x: auto;
+    margin: 0;
+}
+
+.sim-info-section code {
+    font-family: "Courier New", monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--console-text);
+}
+
+.pin-modes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.pin-mode-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.pin-mode-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.pin-mode-badge--input {
+    background: var(--input);
+    color: var(--color-white);
+}
+
+.pin-mode-badge--output {
+    background: var(--output);
+    color: var(--color-white);
+}
+
+.pin-mode-badge--pullup {
+    background: var(--pullup);
+    color: var(--color-white);
+}
+
+.pin-mode-badge--pulldown {
+    background: var(--pulldown);
+    color: var(--color-white);
+}
+
+.pin-mode-info > span {
+    font-size: 0.85rem;
+    color: var(--text);
+}
+
+.sim-examples {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sim-example-btn {
+    padding: 8px 16px;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sim-example-btn:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-primary);
+}
+
+.sim-controls {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.sim-controls .btn-primary,
+.sim-controls .btn-success,
+.sim-controls .btn-danger,
+.sim-controls .btn-secondary,
+.sim-controls .btn-warning,
+.sim-controls .btn-tertiary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    font-size: 1rem;
+    min-width: 0;
+}
+
+.sim-controls .btn-primary span,
+.sim-controls .btn-success span,
+.sim-controls .btn-danger span,
+.sim-controls .btn-secondary span,
+.sim-controls .btn-warning span,
+.sim-controls .btn-tertiary span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.sim-controls .btn-primary svg,
+.sim-controls .btn-success svg,
+.sim-controls .btn-danger svg,
+.sim-controls .btn-secondary svg,
+.sim-controls .btn-warning svg,
+.sim-controls .btn-tertiary svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+@media (max-width: 1000px) {
+    .sim-controls {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .sim-controls {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .sim-controls .btn-primary,
+    .sim-controls .btn-success,
+    .sim-controls .btn-danger,
+    .sim-controls .btn-secondary,
+    .sim-controls .btn-warning,
+    .sim-controls .btn-tertiary {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .sim-controls {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .sim-controls .btn-primary,
+    .sim-controls .btn-success,
+    .sim-controls .btn-danger,
+    .sim-controls .btn-secondary,
+    .sim-controls .btn-warning,
+    .sim-controls .btn-tertiary {
+        padding: 12px 16px;
+    }
+}
+
+.simulator-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    min-width: 0;
+    max-width: 100%;
+}
+
+.simulator-card {
+    background: var(--row-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    animation: cardSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+    overflow: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.simulator-card--removing {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    pointer-events: none;
+}
+
+.simulator-card--collapsing {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    border-width: 0 !important;
+    transition: height 0.2s ease, margin 0.2s ease, padding 0.2s ease, border-width 0.2s ease;
+    pointer-events: none;
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.sim-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.sim-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sim-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.sim-status--stopped {
+    background: var(--color-tertiary);
+    color: var(--text);
+}
+
+.sim-status--running {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+
+.sim-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.sim-config {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+    min-width: 0;
+}
+
+.sim-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.sim-field label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.sim-field input {
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sim-field input:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: var(--focus-ring);
+}
+
+.sim-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.sim-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sim-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.sim-btn--start {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+
+.sim-btn--start:hover {
+    background: var(--color-success-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-success);
+}
+
+.sim-btn--stop {
+    background: var(--color-tertiary);
+    color: var(--color-white);
+}
+
+.sim-btn--stop:hover {
+    background: var(--color-tertiary-hover);
+    transform: translateY(-1px);
+}
+
+.sim-btn--send {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.sim-btn--send:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-primary);
+}
+
+.sim-btn--remove {
+    background: var(--color-danger);
+    color: var(--color-white);
+    margin-left: auto;
+}
+
+.sim-btn--remove:hover {
+    background: var(--color-danger-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-danger);
+}
+
+.sim-btn--clear {
+    background: var(--color-warning);
+    color: var(--color-dark);
+}
+
+.sim-btn--clear:hover {
+    background: var(--color-warning-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-warning);
+}
+
+.sim-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.sim-switch-field {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.sim-switch-field>span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--switch-off);
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: var(--switch-thumb);
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: var(--switch-on);
+}
+
+input:checked+.slider:before {
+    transform: translateX(20px);
+}
+
+.sim-payload-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+    min-width: 0;
+}
+
+.sim-json,
+.sim-console {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    min-width: 0;
+}
+
+.sim-console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.sim-json label,
+.sim-console label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+}
+
+.copy-response-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    background: var(--color-secondary);
+    color: var(--color-white);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copy-response-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.copy-response-btn:hover {
+    background: var(--color-secondary-hover);
+    transform: translateY(-1px);
+}
+
+.copy-response-btn:active {
+    transform: translateY(0);
+}
+
+.sim-json label {
+    margin-bottom: 8px;
+}
+
+.sim-json-wrapper {
+    position: relative;
+}
+
+.sim-json-actions {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.sim-json-approve,
+.sim-json-discard {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-md);
+}
+
+.sim-json-approve {
+    background: var(--color-success);
+    color: var(--color-white);
+}
+
+.sim-json-approve:hover {
+    background: var(--color-success-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-success);
+}
+
+.sim-json-discard {
+    background: var(--color-danger);
+    color: var(--color-white);
+}
+
+.sim-json-discard:hover {
+    background: var(--color-danger-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-danger);
+}
+
+.sim-json-approve svg,
+.sim-json-discard svg {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+}
+
+textarea:disabled {
+    background: var(--row-alt-muted) !important;
+    background-color: var(--row-alt-muted);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.sim-json textarea,
+.sim-console-output {
+    width: 100%;
+    min-height: 120px;
+    max-height: 120px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: "Courier New", monospace;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+    min-width: 0;
+}
+
+.sim-json textarea {
+    resize: vertical;
+}
+
+.sim-console-output {
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--console-text);
+    position: relative;
+}
+
+.scroll-to-bottom-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.scroll-to-bottom-btn:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.scroll-to-bottom-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-bottom-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.sim-json textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 900px) {
+    .sim-config {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .sim-payload-section {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .sim-json textarea,
+    .sim-console-output {
+        min-height: 150px;
+        max-height: 150px;
+    }
+}
+
+@media (max-width: 600px) {
+    .simulator-page {
+        padding: 0;
+    }
+
+    .page-header {
+        margin-bottom: 16px;
+    }
+
+    .page-title h1 {
+        font-size: 1.5rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.85rem;
+    }
+
+    .sim-info-card {
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+
+    .sim-info-header {
+        padding: 12px 16px;
+    }
+
+    .sim-info-title {
+        font-size: 0.9rem;
+    }
+
+    .sim-info-section {
+        padding: 16px;
+    }
+
+    .sim-info-section h3 {
+        font-size: 0.9rem;
+    }
+
+    .sim-info-section pre {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+
+    .sim-info-section code {
+        font-size: 0.8rem;
+    }
+
+    .pin-modes-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .sim-examples {
+        flex-direction: column;
+    }
+
+    .sim-example-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .simulator-card {
+        border-radius: 8px;
+        padding: 16px;
+    }
+
+    .sim-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 12px;
+    }
+
+    .sim-title {
+        font-size: 1rem;
+    }
+
+    .sim-status {
+        font-size: 0.8rem;
+        padding: 3px 8px;
+    }
+
+    .sim-config {
+        gap: 10px;
+    }
+
+    .sim-field label {
+        font-size: 0.85rem;
+    }
+
+    .sim-field input {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    .sim-switch-field {
+        padding: 10px;
+    }
+
+    .sim-switch-field > span {
+        font-size: 0.85rem;
+    }
+
+    .sim-actions {
+        gap: 8px;
+    }
+
+    .sim-btn {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .sim-btn--remove {
+        flex: 1;
+        margin-left: 0;
+    }
+
+    .sim-payload-section {
+        gap: 10px;
+    }
+
+    .sim-json label,
+    .sim-console label {
+        font-size: 0.85rem;
+    }
+
+    .sim-json textarea,
+    .sim-console-output {
+        min-height: 120px;
+        max-height: 120px;
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+
+    .sim-json-actions {
+        bottom: 10px;
+        right: 10px;
+        gap: 6px;
+    }
+
+    .sim-json-approve,
+    .sim-json-discard {
+        width: 32px;
+        height: 32px;
+    }
+
+    .sim-json-approve svg,
+    .sim-json-discard svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .copy-response-btn {
+        padding: 5px;
+    }
+
+    .copy-response-btn svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .scroll-to-bottom-btn {
+        bottom: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .scroll-to-bottom-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+@media (max-width: 420px) {
+    .page-title h1 {
+        font-size: 1.3rem;
+    }
+
+    .page-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .simulator-card {
+        padding: 12px;
+    }
+
+    .sim-header {
+        padding-bottom: 8px;
+    }
+
+    .sim-title {
+        font-size: 0.95rem;
+    }
+
+    .sim-config {
+        gap: 8px;
+    }
+
+    .sim-actions {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .sim-btn {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .sim-json textarea,
+    .sim-console-output {
+        min-height: 100px;
+        max-height: 100px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .sim-switch-field {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .sim-switch-field > span {
+        width: 100%;
+    }
+
+    .switch {
+        align-self: flex-start;
+    }
+}
