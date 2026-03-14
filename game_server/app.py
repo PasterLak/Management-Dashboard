@@ -30,7 +30,7 @@ CONE_END_Y = -GAME_HEIGHT / 2 - 2.0
 TELEMETRY_STALE_MS = 3000
 PLAYER_STALE_MS = 3000
 WORLD_WRAP = True
-REALTIME_BASE_URL = os.getenv("REALTIME_BASE_URL", "http://10.42.0.1").rstrip("/")
+REALTIME_BASE_URL = os.getenv("REALTIME_BASE_URL", "http://localhost:80").rstrip("/")
 PLAYER_COLORS_COUNT = 10
 
 state_lock = Lock()
