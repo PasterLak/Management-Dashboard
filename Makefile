@@ -49,11 +49,7 @@ INCLUDE_COMPONENTS += $(PROJECT_NAME)/views
 INCLUDE_COMPONENTS += $(PROJECT_NAME)/networking
 INCLUDE_COMPONENTS += $(PROJECT_NAME)/data
 
-
-#Only for me necessary because I use another directory: (Timkroe21)
-#ALTERNATIVE_PROJECT_DIR = /home/tim-kroeckel/Dokumente/Iot_Project/PineCone-Management-Dashboard/
-
-
-
+# Configure an alternative directory if you do not want to use it in the root directory
+# ALTERNATIVE_PROJECT_DIR =
 
 include $(BL60X_SDK_PATH)/make_scripts_riscv/project.mk
