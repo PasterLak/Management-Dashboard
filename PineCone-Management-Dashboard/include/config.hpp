@@ -88,7 +88,7 @@ constexpr const char* PASSWORD = "wifi_password";
 #ifdef PRIVATE_DASHBOARD_SERVER_IP
 constexpr const char* DASHBOARD_SERVER_IP = PRIVATE_DASHBOARD_SERVER_IP;
 #else
-constexpr const char* DASHBOARD_SERVER_IP = "192.168.0.1";
+constexpr const char* DASHBOARD_SERVER_IP = "127.0.0.1";
 #endif
 
 constexpr uint16_t DASHBOARD_SERVER_PORT = 80;
